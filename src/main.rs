@@ -1,5 +1,5 @@
-use std::str;
- 
+use std::str; 
+
 const UPPERCASE_OFFSET: i8 = -65;
 const LOWERCASE_OFFSET: i8 = 26 - 97;
 const NUM_OFFSET: i8 = 52 - 48;
@@ -14,7 +14,8 @@ fn base64decode(input: String) -> String {
                 'a' ..= 'z' => ascii + LOWERCASE_OFFSET,
                 'A' ..= 'Z' => ascii + UPPERCASE_OFFSET,
                 '+' => 62,
-                '/' => 63
+                '/' => 63,
+                _ => panic!("Invalid character '{}' :(", ch)
             };
             format!("{:#08b}", convert)[2..].to_string()        //convert indices to binary format and remove the two first digits
         })
@@ -33,7 +34,7 @@ fn base64decode(input: String) -> String {
 }
  
 fn main() {
-    let input = String::new();
+    let mut input = String::new();
     std::io::stdin().read_line(&mut input).unwrap();
     println!("Input: {}", input);
  
